@@ -54,7 +54,9 @@ def initiate_members():
 def send_email(message:str,subject:str):
     sender_email = str(os.environ.get('SENDER_EMAIL'))
     email_passkey = str(os.environ.get('EMAIL_PASSKEY'))
-    recipient_emails = [str(os.environ.get('RECIPIENT_EMAIL1')),str(os.environ.get('RECIPIENT_EMAIL2')),str(os.environ.get('RECIPIENT_EMAIL3'))]
+    recipient_email1 = [str(os.environ.get('RECIPIENT_EMAIL1'))]
+    recipient_email2 = [str(os.environ.get('RECIPIENT_EMAIL2'))]
+    recipient_email3 = [str(os.environ.get('RECIPIENT_EMAIL3'))]
     
     mail = email.message.Message()
     mail['Subject'] = subject
@@ -65,7 +67,9 @@ def send_email(message:str,subject:str):
         # Login to the sender's email account
         server.login(sender_email, email_passkey)
         # Send email
-        server.sendmail(sender_email,recipient_emails,mail_str.encode('utf-8'))
+        server.sendmail(sender_email,recipient_email1,mail_str.encode('utf-8'))
+        server.sendmail(sender_email,recipient_email2,mail_str.encode('utf-8'))
+        server.sendmail(sender_email,recipient_email3,mail_str.encode('utf-8'))
     
     print('mail sent!')
 
